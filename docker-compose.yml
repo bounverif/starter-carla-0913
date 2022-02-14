@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  server:
+    image: 'boundrivesim/carla-server:0.9.13'
+    build: ./server
+    restart: unless-stopped
+    container_name: carla-server
+    command: '-nullrhi'
+    ports:
+      - '2000-2002:2000-2002'
+    networks:
+      - carlasim
+
+  environ:
+    image: 'boundrivesim/carla-environ:0.9.13'
+    build: ./environ
+    restart: on-failure:3
+    container_name: carla-environ
+    command: '--host server'
+    depends_on:
+      - server
+    networks:
+      - carlasim
+
+networks:
+  carlasim:
+    name: carlasim-network
