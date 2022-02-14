@@ -1,0 +1,40 @@
+
+site_name: Documentation
+
+nav:
+  - Home: 'index.md'
+
+  - Introduction:
+    - 'Introduction' : 'intro.md'
+
+  - Scenarios:
+    - 'Scenario 1' : 'scenario-1.md'
+    - 'Scenario 2' : 'scenario-2.md'
+
+  - Testing:
+    - 'Test 1' : 'test-1.md'
+    - 'Test 2' : 'test-2.md'
+
+  - Repeatability: 'repeatability.md'
+
+theme:
+  name: material
+  language: en
+  palette:
+    primary: black
+    accent: red
+  font:
+    text: Ubuntu
+    code: Ubuntu Mono
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - footnotes
+  - markdown.extensions.codehilite:
+      guess_lang: false
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
