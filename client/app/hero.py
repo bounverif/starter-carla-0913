@@ -12,7 +12,7 @@ class Hero(object):
         self.actor = self.world.spawn_hero(blueprint_filter=world.args.filter)
         self.actor.set_autopilot(True, world.args.tm_port)
 
-    def tick(self):
+    def tick(self, clock):
         pass
 
         # Uncomment and modify to control manually, disable autopilot too

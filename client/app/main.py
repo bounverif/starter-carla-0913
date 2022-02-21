@@ -1,4 +1,3 @@
-import carla
 import argparse
 import pygame
 
@@ -52,7 +51,7 @@ def game_loop(args):
 
             # Tick all modules
             world.tick(clock)
-            hero.tick()
+            hero.tick(clock)
             hud.tick(clock)
             input_control.tick(clock)
 
