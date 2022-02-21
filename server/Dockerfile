@@ -24,6 +24,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install \
         xdg-user-dirs \
         xdg-utils \
+        libsdl2-2.0 \
+        xserver-xorg \
         libomp5 \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* 
 

@@ -1,27 +1,42 @@
-version: '3.8'
+version: '3.9'
 
 services:
   server:
-    image: 'boundrivesim/carla-server:0.9.13'
-    build: ./server
+    image: 'doganulus/carla-server:0.9.13'
+    # build: ./server
     restart: unless-stopped
     container_name: carla-server
-    command: '-nullrhi'
+    command: '-nullrhi -nosound' # Disable graphics rendering totally
     ports:
       - '2000-2002:2000-2002'
     networks:
       - carlasim
-
-  environ:
-    image: 'boundrivesim/carla-environ:0.9.13'
-    build: ./environ
-    restart: on-failure:3
-    container_name: carla-environ
-    command: '--host server'
-    depends_on:
-      - server
-    networks:
-      - carlasim
+  #
+  # client:
+  #   image: 'doganulus/carla-client:0.9.13'
+  #   build: ./client
+  #   restart: on-failure:3
+  #   container_name: carla-client
+  #   command: '--host server --map Town06'
+  #   volumes:
+  #     - '$PWD/client:/home/carla/client'
+  #   depends_on:
+  #     - server
+  #   networks:
+  #     - carlasim
+  #
+  # testing:
+  #   image: 'doganulus/carla-testing:0.9.13'
+  #   build: ./testing
+  #   restart: unless-stopped
+  #   container_name: carla-testing
+  #   command: '--host server --map Town06'
+  #   volumes:
+  #     - '$PWD/testing:/home/carla/testing'
+  #   depends_on:
+  #     - server
+  #   networks:
+  #     - carlasim
 
 networks:
   carlasim:
