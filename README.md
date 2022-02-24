@@ -11,7 +11,7 @@ This project contains a multi-container Carla project template for educational p
 
 ## Test drive the container
 
-Once your environment set up, click "Use this template" button to transfer this repo onto your github account and then clone it on local computer.
+Once your environment set up, click "Use this template" button to transfer this repo onto your github account and then clone it on your local computer.
 
 Change to the project directory and you will be able to run the (no-3d-rendering) Carla server by executing the command there
 ```
@@ -31,3 +31,7 @@ Then check the code in `client/app/hero.py` where you can modify this behavior.
 
 - [Carla Simulator Documentation](https://carla.readthedocs.io/en/0.9.13/)
 - [Carla Simulator PythonAPI Reference](https://carla.readthedocs.io/en/0.9.13/python_api/)
+
+## Notes
+
+- This project is configured for 2D rendering of Carla world to allow to work on computers without dedicated graphics cards (still requiring at least 8GB RAM). If you have a decent Nvidia graphics card, then it is possible to use 3D rendering capabilities of the simulator.
