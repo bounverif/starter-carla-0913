@@ -11,11 +11,13 @@ This project contains a multi-container Carla project template for educational p
 
 ## Test drive the container
 
-Once your environment set up, you will be able to run the (no-3d-rendering) Carla server by executing the command in the project directory
+Once your environment set up, click "Use this template" button to transfer this repo onto your github account and then clone it on local computer.
+
+Change to the project directory and you will be able to run the (no-3d-rendering) Carla server by executing the command there
 ```
 docker-compose up -d
 ```
-Then run the client script (wait some time if server still initializing)
+Then run the client script (wait some time if server is still initializing)
 
 ```
 python3 client/run.py
@@ -23,4 +25,9 @@ python3 client/run.py
 
 This client code mostly handles the 2D drawing of Carla world and instatiate a Carla agent with the autopilot enabled. 
 
-Then check the code in `app/hero.py` where you can modify this behavior. 
+Then check the code in `client/app/hero.py` where you can modify this behavior. 
+
+## Check the documentation of Carla Simulator 
+
+- [Carla Simulator Documentation](https://carla.readthedocs.io/en/0.9.13/)
+- [Carla Simulator PythonAPI Reference](https://carla.readthedocs.io/en/0.9.13/python_api/)
