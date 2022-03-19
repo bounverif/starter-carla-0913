@@ -34,7 +34,7 @@ def game_loop(args):
         # Init
         hud = InfoBar(args.width, args.height)
         input_control = InputControl()
-        world = World(args, timeout=2.0)
+        world = World(args)
         hero = Hero()
 
         # For each module, assign other modules that are going to be used inside that module
@@ -99,6 +99,13 @@ def main():
         help="Port to communicate with TM (default: 8000)",
     )
     argparser.add_argument(
+        "--timeout",
+        metavar="X",
+        default=2.0,
+        type=float,
+        help="Timeout duration (default: 2.0s)",
+    )
+    argparser.add_argument(
         "--res",
         metavar="WIDTHxHEIGHT",
         default="1280x720",
@@ -109,23 +116,6 @@ def main():
         metavar="PATTERN",
         default="vehicle.audi.*",
         help='actor filter (default: "vehicle.audi.*")',
-    )
-    argparser.add_argument(
-        "--map",
-        metavar="TOWN",
-        default=None,
-        help="start a new episode at the given TOWN",
-    )
-    argparser.add_argument(
-        "--show-triggers",
-        action="store_true",
-        help="show trigger boxes of traffic signs",
-    )
-    argparser.add_argument(
-        "--show-connections", action="store_true", help="show waypoint connections"
-    )
-    argparser.add_argument(
-        "--show-spawn-points", action="store_true", help="show recommended spawn points"
     )
 
     # Parse arguments

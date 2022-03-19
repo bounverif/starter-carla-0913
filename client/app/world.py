@@ -649,10 +649,9 @@ class MapImage(object):
 class World(object):
     """Class that contains all the information of a carla world that is running on the server side"""
 
-    def __init__(self, args, timeout):
+    def __init__(self, args):
         self.client = None
         self.args = args
-        self.timeout = timeout
         self.fixed_delta_seconds = 0.04
         self.simulation_time = 0
         self.server_clock = pygame.time.Clock()
@@ -695,13 +694,9 @@ class World(object):
         """Retrieves the data from the server side"""
         try:
             self.client = carla.Client(self.args.host, self.args.port)
-            self.client.set_timeout(self.timeout)
+            self.client.set_timeout(self.args.timeout)
 
-            if self.args.map is None:
-                world = self.client.get_world()
-            else:
-                world = self.client.load_world(self.args.map)
-
+            world = self.client.get_world()
             new_settings = world.get_settings()
             new_settings.synchronous_mode = True
             new_settings.fixed_delta_seconds = self.fixed_delta_seconds
@@ -727,9 +722,9 @@ class World(object):
             carla_world=self.world,
             carla_map=self.town_map,
             pixels_per_meter=PIXELS_PER_METER,
-            show_triggers=self.args.show_triggers,
-            show_connections=self.args.show_connections,
-            show_spawn_points=self.args.show_spawn_points,
+            show_triggers=False,
+            show_connections=False,
+            show_spawn_points=False,
         )
 
         self._input = input_control
@@ -865,11 +860,6 @@ class World(object):
             world_pos = tl.get_location()
             pos = world_to_pixel(world_pos)
 
-            if self.args.show_triggers:
-                corners = Util.get_bounding_box(tl)
-                corners = [world_to_pixel(p) for p in corners]
-                pygame.draw.lines(surface, COLOR_BUTTER_1, True, corners, 2)
-
             if self.hero_actor is not None:
                 corners = Util.get_bounding_box(tl)
                 corners = [world_to_pixel(p) for p in corners]
@@ -911,11 +901,6 @@ class World(object):
 
             limit = sl.type_id.split(".")[2]
             font_surface = font.render(limit, True, COLOR_ALUMINIUM_5)
-
-            if self.args.show_triggers:
-                corners = Util.get_bounding_box(sl)
-                corners = [world_to_pixel(p) for p in corners]
-                pygame.draw.lines(surface, COLOR_PLUM_2, True, corners, 2)
 
             # Blit
             if self.hero_actor is not None:

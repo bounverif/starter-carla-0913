@@ -8,6 +8,8 @@ This project contains a multi-container Carla project template for educational p
 - Docker (first [install Docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and then follow [Docker post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/))
 - Docker Compose ([install docker-compose](https://docs.docker.com/compose/install/))
 - Python 3.8 (comes by default in Ubuntu 20.04)
+- Upgrade `pip` to the latest version using `pip install --upgrade pip`
+- Install `pygame` and `carla` package using `pip install pygame carla==0.9.13`
 
 ## Test drive the container
 
@@ -26,6 +28,12 @@ python3 client/run.py
 This client code mostly handles the 2D drawing of Carla world and instatiate a Carla agent with the autopilot enabled. 
 
 Then check the code in `client/app/hero.py` where you can modify this behavior. 
+
+Use the following command to stop the server:
+
+```
+docker-compose down
+```
 
 ## Check the documentation of Carla Simulator 
 
