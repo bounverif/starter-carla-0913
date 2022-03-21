@@ -689,6 +689,7 @@ class World(object):
         self.hero_surface = None
         self.actors_surface = None
         self.show_actor_ids = False
+        self.actor_waypoints = dict()
 
     def _get_data_from_carla(self):
         """Retrieves the data from the server side"""
@@ -790,7 +791,7 @@ class World(object):
             self.hero_actor = random.choice(hero_vehicles)
             self.hero_transform = self.hero_actor.get_transform()
 
-    def spawn_hero(self, blueprint_filter="vehicle.*"):
+    def spawn_hero(self, blueprint_filter="vehicle.*", spawn_point=None):
         """Spawns the hero actor when the script runs"""
         # Get a random blueprint.
         blueprint = random.choice(
@@ -803,6 +804,8 @@ class World(object):
 
         # Spawn the player.
         actor = None
+        if not spawn_point is None:
+            actor = self.world.spawn_actor(blueprint, spawn_point)
         while actor is None:
             spawn_points = self.world.get_map().get_spawn_points()
             spawn_point = (
@@ -960,6 +963,17 @@ class World(object):
                 int(math.ceil(4.0 * self.map_image.scale)),
             )
 
+            # Draw waypoints for vehicle
+            if v[0].id in self.actor_waypoints:
+                points = [world_to_pixel(p) for p in self.actor_waypoints[v[0].id]]
+                pygame.draw.lines(
+                    surface,
+                    (255, 0, 0),
+                    False,
+                    points,
+                    int(math.ceil(2.0 * self.map_image.scale)),
+                )
+
     def render_vehicles_ids(
         self,
         vehicle_id_surface,
@@ -1012,6 +1026,9 @@ class World(object):
         # Dynamic actors
         self._render_vehicles(surface, vehicles, self.map_image.world_to_pixel)
         self._render_walkers(surface, walkers, self.map_image.world_to_pixel)
+
+    def register_actor_waypoints_to_draw(self, actor, waypoints):
+        self.actor_waypoints[actor.id] = waypoints
 
     def clip_surfaces(self, clipping_rect):
         """Used to improve perfomance. Clips the surfaces in order to render only the part of the surfaces that are going to be visible"""
