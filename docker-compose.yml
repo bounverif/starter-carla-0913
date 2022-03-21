@@ -4,7 +4,6 @@ services:
   server:
     image: 'doganulus/carla-server:0.9.13'
     # build: ./server
-    restart: unless-stopped
     container_name: carla-server
     command: '-nullrhi -nosound' # Disable graphics rendering totally
     ports:
