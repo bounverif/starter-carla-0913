@@ -99,7 +99,6 @@ class PurePursuit:
         look_ahead_distance = np.clip(self.K_dd * speed, 8, 20)
 
         track_point = get_target_point(look_ahead_distance, waypoints)
-        print(track_point)
         if track_point is None:
             raise RuntimeError
 
