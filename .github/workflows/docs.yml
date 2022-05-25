@@ -26,4 +26,6 @@ jobs:
           python3 -m pip install mkdocs mkdocs-material mkdocs-minify-plugin
 
       - name: Deploy
-        run: mkdocs gh-deploy --force # build docs and deploy to your github project pages
+        run: |
+          git pull
+          mkdocs gh-deploy # build docs and deploy to your github project pages
